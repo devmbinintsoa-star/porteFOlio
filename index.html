@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mbinintsoa Rakotoarimanana - Développeur WordPress</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background-color: var(--primary);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 0.7rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.85);
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem !important;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+            color: white;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero h1 {
+            font-weight: 700;
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero .lead {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        .hero-btns .btn {
+            padding: 0.7rem 1.8rem;
+            border-radius: 4px;
+            font-weight: 500;
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline-light:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Sections */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-weight: 700;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            color: var(--primary);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            bottom: -10px;
+            left: 0;
+            border-radius: 2px;
+        }
+        
+        .section-light {
+            background-color: white;
+        }
+        
+        /* About Section */
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        /* Skills Section */
+        .skill-category {
+            margin-bottom: 2.5rem;
+        }
+        
+        .skill-category h4 {
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light);
+        }
+        
+        .skill-badge {
+            display: inline-block;
+            background-color: var(--light);
+            color: var(--dark);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            margin: 0.3rem;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-badge:hover {
+            background-color: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Experience & Education */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--secondary);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+        }
+        
+        .timeline-date {
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--primary);
+        }
+        
+        .timeline-subtitle {
+            font-weight: 500;
+            color: #666;
+            margin-bottom: 0.8rem;
+        }
+        
+        /* Projects */
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid #eee;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-img {
+            height: 200px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-title {
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+        }
+        
+        .project-description {
+            color: #666;
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tech-badge {
+            background-color: var(--light);
+            color: var(--dark);
+            padding: 0.3rem 0.7rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        
+        /* Contact */
+        .contact-info {
+            margin-bottom: 2rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.2rem;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-details h5 {
+            margin-bottom: 0.2rem;
+            font-weight: 600;
+        }
+        
+        .contact-details p {
+            margin-bottom: 0;
+            color: #666;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            margin-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+       .weather{
+            background-image:url("meteo.png");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .pizza{
+            background-image:url("PizzaMania.png");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .cours{
+            background-image: url("Cours.png");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .profile-img {
+                width: 180px;
+                height: 180px;
+                margin-bottom: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 100px 0 60px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero .lead {
+                font-size: 1.1rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        .fondcafe{
+            background-image:url(cafe.png);
+            background-repeat:no-repeat;
+            background-size:cover;
+            background-position:center;
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-btns .btn {
+                display: block;
+                width: 100%;
+                margin-right: 0;
+            }
+            
+            .navbar-brand {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Mbinintsoa R.</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#accueil">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#apropos">À propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#competences">Compétences</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#experience">Expérience</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projets">Projets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 hero-content">
+                    <h1>MBININTSOA RAKOTOARIMANANA</h1>
+                    <p class="lead">Développeur WordPress & Intégrateur Front-End</p>
+                    <p>Je conçois des sites performants, responsive et optimisés pour l'expérience utilisateur avec WordPress, HTML, CSS et JavaScript.</p>
+                    <div class="hero-btns">
+                        <a href="#projets" class="btn btn-primary">Voir mes projets</a>
+                        <a href="#contact" class="btn btn-outline-light">Me contacter</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <img src="profile.png" alt="Mbinintsoa Rakotoarimanana" class="profile-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="apropos" class="section section-light">
+        <div class="container">
+            <h2 class="section-title">Profil Professionnel</h2>
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <p class="about-text">
+                        Développeur WordPress avec un solide bagage en intégration front-end (HTML, CSS, JavaScript), je conçois des sites performants, responsive et optimisés pour l'expérience utilisateur.
+                    </p>
+                    <p class="about-text">
+                        Mon expertise réside dans la création et la personnalisation de thèmes WordPress. J'utilise des outils tels que ACF, Elementor et Gutenberg pour concevoir des interfaces dynamiques et personnalisées.
+                    </p>
+                    <p class="about-text">
+                        Autonome, rigoureux et passionné par les bonnes pratiques web (accessibilité, performance, SEO), je suis prêt à m'investir dans des projets de qualité au sein d'équipes ambitieuses.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="competences" class="section">
+        <div class="container">
+            <h2 class="section-title">Compétences</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="skill-category">
+                        <h4>Développement Front-End</h4>
+                        <div>
+                            <span class="skill-badge">HTML5</span>
+                            <span class="skill-badge">CSS3</span>
+                            <span class="skill-badge">JavaScript (ES6+)</span>
+                            <span class="skill-badge">Responsive Design</span>
+                            <span class="skill-badge">Tailwind CSS</span>
+                            <span class="skill-badge">CSS Grid</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>CMS / Builder</h4>
+                        <div>
+                            <span class="skill-badge">WordPress</span>
+                            <span class="skill-badge">Webflow</span>
+                            <span class="skill-badge">Shopify</span>
+                            <span class="skill-badge">Elementor</span>
+                            <span class="skill-badge">Gutenberg</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="skill-category">
+                        <h4>Développement Back-End</h4>
+                        <div>
+                            <span class="skill-badge">PHP</span>
+                            <span class="skill-badge">Python</span>
+                            <span class="skill-badge">MySQL</span>
+                            <span class="skill-badge">JSON</span>
+                            <span class="skill-badge">AJAX</span>
+                            <span class="skill-badge">Laravel</span>
+                            <span class="skill-badge">REST API</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>Outils & Autres</h4>
+                        <div>
+                            <span class="skill-badge">Git / GitHub</span>
+                            <span class="skill-badge">Automatisation Python</span>
+                            <span class="skill-badge">Intégration Web</span>
+                            <span class="skill-badge">ACF</span>
+                            <span class="skill-badge">Figma</span>
+                            <span class="skill-badge">SEO</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="skill-category">
+                        <h4>Langues</h4>
+                        <div>
+                            <span class="skill-badge">Malagasy</span>
+                            <span class="skill-badge">Français</span>
+                            <span class="skill-badge">Anglais</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="skill-category">
+                        <h4>Centres d'intérêt</h4>
+                        <div>
+                            <span class="skill-badge">Instrument de musique</span>
+                            <span class="skill-badge">Choral</span>
+                            <span class="skill-badge">Cinéma et film</span>
+                            <span class="skill-badge">Natation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience & Education -->
+    <section id="experience" class="section section-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2 class="section-title">Expérience Professionnelle</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">Jan 2023 - Août 2025</div>
+                            <h4 class="timeline-title">Développeur d'applications web</h4>
+                            <p class="timeline-subtitle">Institution Faneva IAnkadindramamy</p>
+                            <ul>
+                                <li>Développement d'applications web avec HTML, CSS, JavaScript</li>
+                                <li>Création d'interfaces responsive et intégration de maquettes Figma</li>
+                                <li>Utilisation de Git et optimisation SEO front-end</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-date">Oct 2023 - Août 2025</div>
+                            <h4 class="timeline-title">Formateur en maintenance informatique</h4>
+                            <p class="timeline-subtitle">Institution Faneva IAnkadindramamy</p>
+                            <ul>
+                                <li>Enseignement de la maintenance informatique, parcours électronique</li>
+                                <li>Formation sur les logiciels du parcours comptabilité</li>
+                                <li>Apprentissage du diagnostic et dépannage de l'ordinateur</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-date">Août 2022 - Oct 2022</div>
+                            <h4 class="timeline-title">Analyste Application web - Stagiaire</h4>
+                            <p class="timeline-subtitle">CIDST | Tsimbazaza</p>
+                            <ul>
+                                <li>Examen des données dans le cadre du projet de publication et validation d'article</li>
+                                <li>Analyse des besoins</li>
+                                <li>Développement de l'application du projet</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <h2 class="section-title">Formation & Certifications</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">2021</div>
+                            <h4 class="timeline-title">Licence en informatique</h4>
+                            <p class="timeline-subtitle">Développement d'application | Infocentre de la salle</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-date">2018</div>
+                            <h4 class="timeline-title">Baccalauréat</h4>
+                            <p class="timeline-subtitle">Lycée la grâce de Dieu espoir</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-date">En cours</div>
+                            <h4 class="timeline-title">Formation en Python</h4>
+                            <p class="timeline-subtitle">Udemy</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-date">2025</div>
+                            <h4 class="timeline-title">Formation script d'automatisation avec Python</h4>
+                            <p class="timeline-subtitle">Udemy</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-date">2024</div>
+                            <h4 class="timeline-title">JavaScript Ultime</h4>
+                            <p class="timeline-subtitle">Udemy</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projets" class="section">
+        <div class="container">
+            <h2 class="section-title">Projets & Réalisations</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <i class="fas fa-blog fa-3x">
+                                <video width="100%" height="400" controls autoplay muted>
+                                    <source src="Modeblog Wordpress.mp4" type="video/mp4">
+                                    Votre navigateur ne supporte pas la lecture de vidéos. </video>
+                            </i>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Blog mode WordPress personnalisé</h3>
+                            <p class="project-description">Développement d'un blog WordPress personnalisé pour le secteur de la mode avec création d'interfaces responsive et customisation de thème enfant.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">WordPress</span>
+                                <span class="tech-badge">ACF</span>
+                                <span class="tech-badge">Git</span>
+                                <span class="tech-badge">SEO</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="project-card">
+                        <div class="project-img fondcafe">
+                            <i class="fa-3x"></i>
+                        </div>
+                        <div class="project-content ">
+                            <h3 class="project-title"><a href="cafe.html">Site vitrine d'un Café</a></h3>
+                            <p class="project-description">Conception d'une interface web interactive avec HTML, CSS et JavaScript, création de pages responsives.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">HTML</span>
+                                <span class="tech-badge">Tailwind
+                                </span>
+                                <span class="tech-badge">CSS</span>
+                                <span class="tech-badge">JavaScript</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="project-card">
+                        <div class="project-img weather">
+                            <i class=""></i>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title"><a href="meteo.html">Weather radar - Intégration API JS</a></h3>
+                            <p class="project-description">Utilisation de JavaScript pour récupérer et afficher des données météo en temps réel avec requêtes AJAX pour un chargement dynamique.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">API</span>
+                                <span class="tech-badge">AJAX</span>
+                                <span class="tech-badge">HTML/CSS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 col-md-6 mb-4">
+                    <div class="project-card">
+                        <div class="project-img cours">
+                            <i class="fas fa-graduation-cap fa-3x "></i>
+                        </div>
+                        <div class="project-content ">
+                            <h3 class="project-title"><a href="cours.html">E-Anatra - Plateforme d'apprentissage en ligne</a></h3>
+                            <p class="project-description">Conception
+                                 d'une interface web interactive avec HTML, CSS et JavaScript,
+                                  création de pages responsives pour la présentation des cours.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">HTML</span>
+                                <span class="tech-badge">CSS</span>
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">Responsive</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 col-md-6 mb-4">
+                    <div class="project-card">
+                        <div class="project-img pizza">
+                            <i class=""></i>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title"><a href="pizzamania.html">PizzaMania - Site vitrine</a></h3>
+                            <p class="project-description">Développement d'un site web responsive en utilisant JavaScript pour l'interactivité et Tailwind CSS avec CSS Grid pour un design moderne.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">Tailwind CSS</span>
+                                <span class="tech-badge">CSS Grid</span>
+                                <span class="tech-badge">Responsive</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <h3 style="text-align: center;"><a href="">voir toute mes projet</a></h3> 
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section section-light">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <h5>Téléphone</h5>
+                                        <p>033 70 979 15 / 034 99 098 20</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <h5>Email</h5>
+                                        <p> mbinintsoarakotoarimanana14@gmail.com</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <h5>Adresse</h5>
+                                        <p>11 H 18 ter B Ankadindramamy</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-globe"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <h5>Portfolio</h5>
+                                        <p>mbinintsoa14.github.io/portefolio.github.io/</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fab fa-github"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <h5>GitHub</h5>
+                                        <p>github.com/Mbinintsoa14</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/Mbinintsoa14" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="mailto:mbinintsoarakotoarimanana14@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Mbinintsoa Rakotoarimanana. Tous droits réservés.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                document.querySelector('.navbar').classList.add('scrolled');
+            } else {
+                document.querySelector('.navbar').classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Update active nav link on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
